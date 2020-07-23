@@ -1,0 +1,503 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="icon" href="img/ventanas.png">
+
+
+    <title>Simulador Procesos</title>
+  </head>
+  <body>
+    <!--================================
+    =            Navegacion            =
+    =================================-->
+      <nav class="navbar navbar-expand-lg navbar-dark container-fluid sticky-top" style="background: #352B71">
+        <a class="navbar-brand " href="index.html">
+          <img src="img/ventanas.png" width="30" height="30" class="d-inline-block align-top">
+          Simulador
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+          <div class="navbar-nav text-center ml-auto">
+            <a class="nav-item nav-link active" href="index.html">Inicio</a>
+            <a class="nav-item nav-link" href="nosotros.html">Nosotos</a>
+            <a href="#"><img src="img/github.png" width="30" height="30" class="d-inline-block align-top"></a>
+          </div>
+        </div>
+      </nav>
+  
+    <!--====  End of Navegacion  ====-->
+
+
+    <!--====================================
+    =            añadir proceso            =
+    =====================================-->
+    
+     <div class="container-fluid slider d-flex flex-column justify-content-center align-items-center mt-4">
+        <div class="imput-group input-group-sm mb-3">
+            <div class="text-center" style="color: #F84E4E">
+                <h5>Añadir un nuevo proceso</h5>
+            </div>
+            <form class="d-flex " style="color: #FC7272">
+                <div class="form-groud">
+                  <label>TIEMPO LLEGADA</label>
+                  <input type="number" name="" id="addTLl" class="form-control" placeholder="Ingrese T.Llegada">
+                </div>
+                <div class="form-groud ml-2">
+                   <label>TIEMPO CPU</label>
+                  <input type="number" name="" id="addTCPU" class="form-control" placeholder="Ingrese T.CPU">
+                </div>
+
+                <div class="form-groud ml-2">
+                   <label>PRIORIDAD</label>
+                  <input type="number" name="" id="addPrioridad" class="form-control" placeholder="Ingrese prioridad">
+                </div>
+                
+                <div class="form-groud ml-2">
+                  <button type="button" class="btn btn-primary mt-4" onclick="nuevoProceso()" id="btnAddProceso">Añadir</button>
+                </div>
+            </form> 
+        </div> 
+    </div>
+    <!--====  End of añadir proceso  ====-->
+    
+   
+       <!--==============================
+       =            Comandos            =
+       ===============================-->
+       <div div class="container-fluid slider d-flex flex-column justify-content-center align-items-center mt-4">
+            <div class="text-center" style="color: #F84E4E">
+                <h5>COMANDOS</h5>
+            </div>
+            <div class="d-flex">
+                <button type="button" class="btn btn-success " id = "inicio" onclick="inicio()"> Inicar</button>
+                <button type="button" class="btn btn-danger ml-1" id = "pausa" d onclick="pausa()">Pausa</button>
+                <button type="button" class="btn btn-secondary ml-1" id = "reinicio"  onclick="reinicio()">Reiniciar</button>
+            </div>
+        </div>
+       <!--====  End of Comandos  ====-->
+
+
+        <!--===========================
+        =            Tabla            =
+        ============================-->
+        <div class="container-fluid slider d-flex flex-column justify-content-center align-items-center mt-4">
+        <div class="text-center" style="color: #F84E4E">
+                <h5>TIPOS DE PROCESOS</h5>
+        </div> 
+        <nav class="nav nav-pills justify-content-center" id="tabs">
+            <a id= "FIFO" class="nav-item nav-link active" style="cursor: pointer;" onclick="Simulador.tabEvent('FIFO')"><h5 style="color: #FC7272" >FIFO</h5></a>
+            <a id= "SJF" class="nav-item nav-link"  style="cursor: pointer;" onclick="Simulador.tabEvent('SJF')"><h5 style="color: #FC7272" >SJF</h5></a>
+            <a id="PRIORIDAD" class="nav-item nav-link" style="cursor: pointer;" onclick="Simulador.tabEvent('PRIORIDAD')"><h5 style="color: #FC7272" >PRIORIDAD</h5></a>
+            <a id="PRIORIDAD_EXP" class="nav-item nav-link" style="cursor: pointer;" onclick="Simulador.tabEvent('PRIORIDAD_EXP')"><h5 style="color: #FC7272" >PRIORIDAD EXP</h5></a>
+            <a id="SRTF" class="nav-item nav-link" style="cursor: pointer;" onclick="Simulador.tabEvent('SRTF')"><h5 style="color: #FC7272" >SRTF</h5></a>
+        </nav>
+        </div>
+
+        <div id="FIFOContent" class="container mt-4">
+      
+        <table border ="1" id="FIFOTabla" class="table table-bordered">
+            <thead >
+                <tr>
+                <th>Nombre</th>
+                <th>T.Llegaga</th>
+                <th>T.CPU</th>
+                <th>T.Comienzo</th>
+                <th>T.Fin</th>
+                <th>T.Espera</th>
+                <th>ESTADO</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>  
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>  
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td>-</td>
+                </tr>
+            </tbody>
+        </table> 
+        <div class=" text-center" >
+            <span class="" style="color: #F84E4E"><h5 id="FIFOTabla_TTEsp">TIEMPO DE ESPERA TOTAL:</h5></span>
+        </div>
+        <hr>   
+    </div>
+    
+    <div id="SJFContent" class="container mt-4" style="display: none;">
+        <table border ="1" id="SJFTabla" class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>T.Llegaga</th>
+                <th>T.CPU</th>
+                <th>T.Comienzo</th>
+                <th>T.Fin</th>
+                <th>T.Espera</th>
+                <th>ESTADO</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td> 
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td> 
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <span class="" style="color: #F84E4E"><h5 id="SJFTabla_TTEsp">TIEMPO DE ESPERA TOTAL:</h5></span>
+        </div>
+        <hr>
+    </div>
+    
+    <div id="PRIORIDADContent" class="container mt-4" style="display: none;">
+        <table border ="1" id="PRIORIDADTabla" class="table table-bordered">
+            <thead >
+                <tr>
+                <th>Nombre</th>
+                <th>T.Llegaga</th>
+                <th>T.CPU</th>
+                <th>Prioridad</th>
+                <th>T.Comienzo</th>
+                <th>T.Fin</th>
+                <th>T.Espera</th>
+                <th>ESTADO</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>             
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>
+        <div class="text-center">
+            <span class="" style="color: #F84E4E"><h5 id="PRIORIDADTabla_TTEsp">TIEMPO DE ESPERA TOTAL:</h5></span>
+        </div>
+        <hr>     
+    </div>
+
+    <div id="PRIORIDAD_EXPContent" class="container mt-4" style="display: none;">
+        
+        <table border ="1" id="PRIORIDAD_EXPTabla" class="table table-bordered">
+            <thead >
+                <tr>
+                <th>Nombre</th>
+                <th>T.Llegada</th>
+                <th>T.CPU</th>
+                <th>prioridad</th>
+                <th>T.Comienzo</th>
+                <th>T.Pausa</th>
+                <th>T.Reinicio</th>
+                <th>T.Fin</th>
+                <th>T.Espera</th>
+                <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>              
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table> 
+        <div class="text-center">
+            <span style="color: #F84E4E"><h5 id="PRIORIDAD_EXPTabla_TTEsp">TIEMPO DE ESPERA TOTAL:</h5></span>
+        </div>
+        <hr>     
+    </div>
+
+    <div id="SRTFContent" class="container mt-4" style="display: none;">
+        <table border ="1" id="SRTFTabla" class="table table-bordered">
+            <thead>
+                <tr>
+                <th>Nombre</th>
+                <th>T.Llegada</th>
+                <th>T.CPU</th>
+                <th>T.Comienza</th>
+                <th>T.Pausa</th>
+                <th>T.Reinicio</th>
+                <th>T.Fin</th>
+                <th>T.Espera</th>
+                <th>Estado</th>
+                </tr>
+            </thead>
+            <tbody >
+                <tr >
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>  
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                    <td></td>
+                </tr>
+            </tbody>
+        </table>        
+        <div class="text-center">
+            <span class="" style="color: #F84E4E"><h5 id="SRTFTabla_TTEsp">TIEMPO DE ESPERA TOTAL:</h5></span>
+        </div>
+        <hr>     
+        </div>
+
+        <!--====  End of Tabla  ====-->
+
+
+        <!--============================
+        =            footer            =
+        =============================-->
+        <div class="container-fluid" style="background: #352B71">
+            <div class="row">
+                <footer class="mt-2 ml-2 text-white">
+                    <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/"><img alt="Licencia Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-nc-sa/4.0/88x31.png" /></a><br />Esta obra está bajo una <a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">Licencia Creative Commons Atribución-NoComercial-CompartirIgual 4.0 Internacional</a>.
+
+                    <div>Iconos diseñados por <a href="https://www.flaticon.es/autores/freepik" title="Freepik">Freepik</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
+
+                    <div>Iconos diseñados por <a href="https://www.flaticon.es/autores/pixel-perfect" title="Pixel perfect">Pixel perfect</a> from <a href="https://www.flaticon.es/" title="Flaticon">www.flaticon.es</a></div>
+                </footer>
+            </div>
+        </div>
+        <!--====  End of footer  ====-->
+    
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/simulador.js"></script>
+  </body>
+</html>
